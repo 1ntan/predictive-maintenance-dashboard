@@ -35,30 +35,34 @@ st.info(
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric(
-    "Unit Mesin",
-    "100"
-)
+with col1:
+    st.metric(
+        label="Unit Mesin",
+        value="100"
+    )
 
-col2.metric(
-    "Sensor",
-    "21"
-)
+with col2:
+    st.metric(
+        label="Sensor",
+        value="21"
+    )
 
-col3.metric(
-    "RMSE Terbaik",
-    "13.24"
-)
+with col3:
+    st.metric(
+        label="RMSE Terbaik",
+        value="13.24"
+    )
 
-col4.metric(
-    "MAE Terbaik",
-    "9.68"
-)
+with col4:
+    st.metric(
+        label="MAE Terbaik",
+        value="9.68"
+    )
 
 st.divider()
 
 # =====================================================
-# TABS
+# MENU TAB
 # =====================================================
 
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
@@ -128,11 +132,11 @@ with tab2:
     with col2:
 
         st.success("""
-        Subset FD001 Dipilih
+        Dataset FD001 dipilih karena:
 
-        • Kondisi Operasi Tunggal
+        • Kondisi operasi tunggal
 
-        • Banyak digunakan pada penelitian Predictive Maintenance
+        • Banyak digunakan dalam penelitian Predictive Maintenance
 
         • Cocok untuk benchmarking model Deep Learning
         """)
@@ -164,14 +168,15 @@ with tab3:
     st.subheader("Visualisasi Signal Denoising")
 
     st.image(
-        "assets/denoising_signal.png",
+        "data/denoising_signal.png",
         use_container_width=True
     )
 
     st.write("""
     Teknik Moving Average digunakan untuk mengurangi noise pada sinyal sensor.
+
     Hasil denoising menghasilkan pola degradasi mesin yang lebih stabil
-    sehingga dapat meningkatkan kualitas data sebelum proses pelatihan model.
+    sehingga kualitas data meningkat sebelum proses pelatihan model.
     """)
 
 # =====================================================
@@ -247,7 +252,7 @@ with tab5:
     with col1:
 
         st.image(
-            "assets/cnn_lstm_loss.png",
+            "data/cnn_lstm_loss.png",
             caption="Training Loss CNN-LSTM",
             use_container_width=True
         )
@@ -255,7 +260,7 @@ with tab5:
     with col2:
 
         st.image(
-            "assets/cnn_lstm_prediction.png",
+            "data/cnn_lstm_prediction.png",
             caption="Prediksi CNN-LSTM",
             use_container_width=True
         )
@@ -274,7 +279,7 @@ with tab5:
     with col1:
 
         st.image(
-            "assets/transformer_loss.png",
+            "data/transformer_loss.png",
             caption="Training Loss Transformer",
             use_container_width=True
         )
@@ -282,14 +287,14 @@ with tab5:
     with col2:
 
         st.image(
-            "assets/transformer_prediction.png",
+            "data/transformer_prediction.png",
             caption="Prediksi Transformer",
             use_container_width=True
         )
 
     st.write("""
     Transformer menggunakan mekanisme Self-Attention
-    untuk menangkap hubungan jangka panjang antar data sensor.
+    untuk mempelajari hubungan jangka panjang antar data sensor.
     """)
 
 # =====================================================
@@ -307,7 +312,13 @@ with tab6:
     st.subheader("Ranking Model")
 
     ranking = pd.DataFrame({
-        "Peringkat": ["🥇", "🥈", "🥉"],
+
+        "Peringkat": [
+            "🥇",
+            "🥈",
+            "🥉"
+        ],
+
         "Model": [
             "CNN-LSTM",
             "1D-CNN",
